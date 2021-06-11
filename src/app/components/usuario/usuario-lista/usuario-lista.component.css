@@ -1,0 +1,53 @@
+.center {
+    display: flex;
+    justify-content: center;
+    margin-top: 3%;
+    margin-bottom: 3%;
+}
+
+.conteiner {
+    padding-left: 15px;
+}
+
+
+/* deixa tabela do tamanho certo */
+
+table {
+    width: 100%;
+}
+
+.edit {
+    margin-right: 10px;
+}
+
+.edit>i {
+    color: #e0de67;
+}
+
+.info>i {
+    margin-right: 10px;
+    color: #598dda;
+}
+
+.visibility>i {
+    color: #877a7a;
+    margin-right: 10px;
+}
+
+.print>i {
+    margin-right: 10px;
+    color: #598dda;
+}
+
+.delete>i {
+    color: #da5959;
+    /* margin-right: 10px; */
+}
+
+.end {
+    margin-top: 1%;
+    background-color: white;
+    border-bottom: 0px;
+    border: none!important;
+    text-decoration: #ffffff;
+}

@@ -1,0 +1,48 @@
+.center {
+    display: flex;
+    justify-content: center;
+    margin-top: 3%;
+    margin-bottom: 3%;
+  }
+
+  .example-button-row button,
+  .example-button-row a {
+    margin-top:15px;
+    margin-left: 25px;
+    margin-bottom: 15px;
+  }
+
+ /* deixa tabela do tamanho certo */
+ table {
+  width: 100%;
+}
+
+.edit>i {
+  color: #da5959;
+  margin-right: 10px;
+  
+}
+
+.info>i {
+  margin-right: 10px;
+  color: #598dda;
+} 
+
+.visibility>i {
+  color: #877a7a;
+  margin-right: 10px;
+}
+
+.print>i {
+  margin-right: 10px;
+  color: #598dda;
+}
+
+
+.grid-container2 {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  padding: 10px;
+}
+
+

@@ -1,0 +1,10 @@
+.content {
+    padding: 16px;
+    background-color: #ffffff;
+}
+
+
+
+@media only screen and (max-width: 980px){
+    .verification { display: none; }
+}

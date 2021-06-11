@@ -1,1 +1,62 @@
-/* You can add global styles to this file, and also import other style files */
+
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+
+.login {
+    display: flex;
+    -ms-flex-align: center;
+    align-items: center;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    background-color: #ffffff;
+}
+
+.formLogin {
+    width: 100%;
+    max-width: 420px;
+    padding: 15px;
+    margin: auto;
+}
+
+.formLoginContent {
+    text-decoration-color: none;
+    margin-bottom: 10px;
+}
+
+.logoLogin {
+    max-width: 512px;
+}
+
+/* .red {
+    color: #e35e6b;
+}
+
+.v-middle {
+    vertical-align: middle;
+}
+
+.msg-success {
+    background-color: #1b7cb4;
+    color: #ffffff;
+}
+
+.msg-error {
+    background-color: #b41b1b;
+    color: #000000;
+}
+
+.msg-errorForm {
+    background-color: #b41b1b;
+    color: #ffffff;
+} */
+
+

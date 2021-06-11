@@ -1,0 +1,22 @@
+/* .footer {
+    position:absolute;
+    bottom:0;
+    width:100%;
+} */
+
+.footer {
+    position: fixed;
+    bottom: 0px;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    font-size: 15px;
+    background-color: #162163;
+    color: white;
+}
+
+.footer .span {
+    font-size: 1px;
+    font-weight: 15;
+    justify-content: center;
+}

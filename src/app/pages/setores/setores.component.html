@@ -1,0 +1,56 @@
+<h1 class="center">Escolha o setor</h1>
+<div class="grid-container2">
+  <div class="cliente">
+    <mat-list-item>Cliente: {{dados.cliente}}</mat-list-item>
+  </div>
+</div>
+<mat-divider></mat-divider>
+<ngx-spinner></ngx-spinner>
+<!-- tabela -->
+<div class="mat-elevation-z8">
+  <table mat-table [dataSource]="dataSource">
+
+    <!-- Position Column -->
+    <ng-container matColumnDef="position">
+      <th mat-header-cell *matHeaderCellDef>Nº</th>
+      <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef> Nome </th>
+      <td mat-cell *matCellDef="let element"> {{element.nome}} </td>
+    </ng-container>
+
+
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="symbol" class="end">
+      <th mat-header-cell *matHeaderCellDef> Ações </th>
+      <td mat-cell *matCellDef="let element">
+
+        <a (click)="verEquipamento(element.nome, element.id)" class="visibility" title="Ver equipamento">
+          <i type="button" class="material-icons">
+            visibility
+          </i>
+        </a>
+
+        <a (click)="enviarOS(element.nome, element.id)" class="edit" title="Enviar email">
+          <i type="button" class="material-icons">
+            forward_to_inbox
+          </i>
+        </a>
+
+
+
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+  <div class="example-button-row">
+    <button mat-raised-button color="primary" (click)="cancel()">Voltar</button>
+  </div>
+
+</div>

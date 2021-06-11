@@ -1,0 +1,48 @@
+<h1 class="center">Clientes Desativados</h1>
+<!-- <mat-divider></mat-divider> -->
+<!-- filtro -->
+<mat-form-field class="conteiner">
+    <input (keyup)="applyFilter($event.target.value)" matInput placeholder="Pesquisar">
+</mat-form-field>
+<ngx-spinner></ngx-spinner>
+<!-- tabela -->
+<div class="mat-elevation-z8">
+    <table mat-table [dataSource]="dataSource">
+
+        <!-- Position Column -->
+        <ng-container matColumnDef="position">
+            <th mat-header-cell *matHeaderCellDef>Nº</th>
+            <td mat-cell *matCellDef="let element"> {{element.idCliente}} </td>
+        </ng-container>
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef> Nome </th>
+            <td mat-cell *matCellDef="let element"> {{element.nome}} </td>
+        </ng-container>
+
+
+        <!-- Symbol Column -->
+        <ng-container matColumnDef="symbol" class="end">
+            <th mat-header-cell *matHeaderCellDef> Ações </th>
+            <td mat-cell *matCellDef="let element">
+
+
+                <a *ngIf="permissao != 'ROLE_TECNICO'" (click)="update(element)" class="view" title="Restaurar">
+                    <i type="button" class="material-icons">
+            restore_from_trash
+          </i>
+                </a>
+
+
+
+            </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+
+    <!-- paginacao -->
+    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+</div>

@@ -1,0 +1,9 @@
+.grid-list {
+    display: grid;
+    grid-template-columns: auto auto;
+    padding: 10px;
+}
+
+.form-group {
+    margin-right: 15px;
+}

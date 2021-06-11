@@ -1,0 +1,89 @@
+<mat-card>
+    <h1 class="center">Equipamento</h1>
+    <ngx-spinner></ngx-spinner>
+    <form #f="ngForm" class="grid-list">
+
+
+        <div class="form-group" [class.has-error]="!nome.valid && nome.touched">
+            <label for="nomeMarca">Modelo</label>
+
+            <input disabled placeholder="Nome de Categoria" type="text" class="form-control" name="nome" id="nome" required #nome="ngModel" [class.is-invalid]="!nome.valid && nome.touched" [(ngModel)]="equipamento.modelo" name="nomeCategoria">
+            <div class="alert alert-danger" role="alert" *ngIf="!nome.valid && nome.touched">
+                Insira o Modelo
+            </div>
+        </div>
+
+        <div class="form-group" [class.has-error]="!nome.valid && nome.touched">
+            <label for="nomeMarca">Nº Serie</label>
+
+            <input disabled placeholder="Nome de Categoria" type="text" class="form-control" name="nome" id="nome" required #nome="ngModel" [class.is-invalid]="!nome.valid && nome.touched" [(ngModel)]="equipamento.numero_serie" name="numero_serie">
+            <div class="alert alert-danger" role="alert" *ngIf="!nome.valid && nome.touched">
+                Insira o Numero de serie
+            </div>
+        </div>
+
+        <div class="form-group" [class.has-error]="!nome.valid && nome.touched">
+            <label for="nomeMarca">Ano de Fabricação</label>
+
+            <input disabled placeholder="Nome de Categoria" type="text" class="form-control" name="nome" id="nome" required #nome="ngModel" [class.is-invalid]="!nome.valid && nome.touched" [(ngModel)]="equipamento.ano_fabrica" name="ano_fabrica">
+            <div class="alert alert-danger" role="alert" *ngIf="!nome.valid && nome.touched">
+                Insira o ano de fabricação
+            </div>
+        </div>
+
+        <div class="form-group" [class.has-error]="!nome.valid && nome.touched">
+            <label for="nomeMarca">Fabricante</label>
+
+            <input disabled placeholder="Nome do Fabricante" type="text" class="form-control" name="nome" id="nome" required #nome="ngModel" [class.is-invalid]="!nome.valid && nome.touched" [(ngModel)]="equipamento.fabricante" name="fabricante">
+            <div class="alert alert-danger" role="alert" *ngIf="!nome.valid && nome.touched">
+                Insira o fabricante
+            </div>
+        </div>
+
+        <div class="form-group" [class.has-error]="!nome.valid && nome.touched">
+            <label for="nomeMarca">Numero de Patrimonio</label>
+
+            <input disabled placeholder="Numero de Patrimonio" type="text" class="form-control" name="nome" id="nome" required #nome="ngModel" [class.is-invalid]="!nome.valid && nome.touched" [(ngModel)]="equipamento.numero_patrimonio" name="numero_patrimonio">
+            <div class="alert alert-danger" role="alert" *ngIf="!nome.valid && nome.touched">
+                Insira o numero de patrimonio
+            </div>
+        </div>
+
+        <div class="form-group" [class.has-error]="!nome.valid && nome.touched">
+            <label for="nomeMarca">Tensão de alimentação</label>
+
+            <input disabled placeholder="Tensão de alimentação" type="text" class="form-control" name="nome" id="nome" required #nome="ngModel" [class.is-invalid]="!nome.valid && nome.touched" [(ngModel)]="equipamento.tensao_alimentacao" name="tensao_alimentacao">
+            <div class="alert alert-danger" role="alert" *ngIf="!nome.valid && nome.touched">
+                Insira a Tensão de alimentação
+            </div>
+        </div>
+
+        <div class="form-group" [class.has-error]="!nome.valid && nome.touched">
+            <h4>Aparelho atual: {{equipamento.autoclave.nome}}</h4>
+        </div>
+
+        <div class="btn-group mb-3">
+            <!-- <button type="submit" class="btn btn-primary" [disabled]="!f.valid">Enviar</button> -->
+            <button type="button" class="btn btn-primary voltar" (click)="cancel()">Voltar</button>
+        </div>
+
+
+
+    </form>
+
+    <div>
+        <qrcode [qrdata]="myAngularxQrCode" [width]="256" [errorCorrectionLevel]="'M'"></qrcode>
+    </div>
+    <h2 class="text-center">Imagens do Equipamento</h2>
+    <br>
+    <div class="imagem-grid">
+
+        <div class="text-center" *ngFor="let item of imagens; index as i">
+            <!-- <h3>{{item.tipo}},{{item.img}}</h3> -->
+            <img src="{{item}}" class="avatar img-circle img-thumbnail" alt="imagem">
+            <h6>Imagem {{i}}</h6>
+        </div>
+
+
+    </div>
+</mat-card>

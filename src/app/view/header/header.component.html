@@ -1,0 +1,59 @@
+<mat-toolbar class="header mat-elevation-z7">
+    <span class="title-group">
+
+        <a routerLink="/">
+            Home
+        </a>
+
+    </span>
+    <span class="example-spacer"></span>
+
+
+    <a class="navEspacamento">
+        <button mat-button [matMenuTriggerFor]="clientes">
+            <a>
+                Clientes
+            </a>
+        </button>
+    </a>
+
+    <a class="navEspacamento">
+        <button mat-button [matMenuTriggerFor]="equipamentos">
+            <a>
+                Equipamentos
+            </a>
+        </button>
+    </a>
+
+
+    <a>
+        <span class="title-group ">
+            Perfil
+        </span>
+
+        <button mat-button [matMenuTriggerFor]="menu" class='buton'>
+            <img class="perfil avatar avatar-lg rounded-circle" src="assets/img/profile.png" alt="logo">
+        </button>
+    </a>
+
+
+</mat-toolbar>
+
+<mat-menu #menu="matMenu" xPosition="before">
+    <!-- <button mat-menu-item routerLink="#">Perfil</button> -->
+    <button *ngIf="role == 'ROLE_ADMINISTRATIVO'" mat-menu-item routerLink="/usuario/create">Cadastrar</button>
+    <button *ngIf="role == 'ROLE_ADMINISTRATIVO'" mat-menu-item routerLink="/usuario/listar">Listar Usuarios</button>
+    <button mat-menu-item (click)="sair()">Sair</button>
+</mat-menu>
+
+<mat-menu #clientes="matMenu" xPosition="before">
+    <button *ngIf="role == 'ROLE_ADMINISTRATIVO'" mat-menu-item routerLink="/cliente/create">Cadastrar</button>
+    <button mat-menu-item routerLink="/clientes">Cadastrados</button>
+    <button mat-menu-item routerLink="/cliente/delete">Excluidos</button>
+</mat-menu>
+
+<mat-menu #equipamentos="matMenu" xPosition="before">
+    <!-- <button mat-menu-item routerLink="/equipamento/create">Cadastrar</button> -->
+    <button mat-menu-item routerLink="/equipamento/lista">Cadastrados</button>
+    <button mat-menu-item routerLink="/equipamento/delete">Excluidos</button>
+</mat-menu>

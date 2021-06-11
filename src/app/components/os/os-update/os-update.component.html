@@ -1,0 +1,282 @@
+<mat-card>
+    <h1 class="center">Alterar os</h1>
+    <ngx-spinner></ngx-spinner>
+    <form #f="ngForm" (ngSubmit)="OnSumbit(f)">
+
+        <div class="grid-container">
+
+            <!-- <mat-card> -->
+            <mat-form-field appearance="fill" class="select">
+                <mat-label>Selecione o Tipo</mat-label>
+                <mat-select disabled [(value)]="os.tipo">
+                    <mat-option value="Corretiva">Corretiva</mat-option>
+                    <mat-option value="Preventiva">Preventiva</mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <mat-form-field appearance="fill" class="select">
+                <mat-label>Status</mat-label>
+                <mat-select [(value)]="os.status">
+                    <mat-option value="Executada">Executada</mat-option>
+                    <mat-option value="Pendente">Pendente</mat-option>
+                    <mat-option value="Cancelada">Cancelada</mat-option>
+                </mat-select>
+            </mat-form-field>
+
+
+
+            <!-- <h3>Selecione o Mes</h3> -->
+            <mat-form-field appearance="fill" class="select">
+                <mat-label>Mês</mat-label>
+                <mat-select [(value)]="os.mes">
+                    <mat-option value="01">JANEIRO</mat-option>
+                    <mat-option value="02">FEVEREIRO </mat-option>
+                    <mat-option value="03">MARÇO</mat-option>
+                    <mat-option value="04">ABRIL </mat-option>
+                    <mat-option value="05">MAIO </mat-option>
+                    <mat-option value="06">JUNHO </mat-option>
+                    <mat-option value="07">JULHO</mat-option>
+                    <mat-option value="08">AGOSTO</mat-option>
+                    <mat-option value="09">SETEMBRO</mat-option>
+                    <mat-option value="10">OUTUBRO</mat-option>
+                    <mat-option value="11">NOVEMBRO</mat-option>
+                    <mat-option value="12">DEZEMBRO</mat-option>
+                </mat-select>
+            </mat-form-field>
+
+
+            <mat-form-field appearance="fill" class="select">
+                <mat-label>Selecione o Ano</mat-label>
+                <mat-select [(value)]="os.ano">
+                    <mat-option value="2020">2020</mat-option>
+                    <mat-option value="2021">2021</mat-option>
+                    <mat-option value="2022">2022</mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <mat-form-field appearance="fill">
+                <mat-label>Coloque a data</mat-label>
+                <mat-date-range-input [formGroup]="range" [rangePicker]="picker">
+                    <input matStartDate formControlName="start" placeholder="Start date">
+                    <input matEndDate formControlName="end" placeholder="End date">
+                </mat-date-range-input>
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-date-range-picker #picker></mat-date-range-picker>
+            </mat-form-field>
+            <!-- </mat-card> -->
+        </div>
+
+
+
+
+
+
+        <!-- parte Corretiva -->
+        <div *ngIf="os.tipo == 'Corretiva'">
+
+            <div class="form-group" [class.has-error]="!nome.valid && nome.touched">
+                <label for="nomeMarca">Motivo da Solicitação</label>
+                <input placeholder="Insira o Motivo" type="text" class="form-control" name="nome" id="nome" required #nome="ngModel" [class.is-invalid]="!nome.valid && nome.touched" [(ngModel)]="os.motivo" name="motivo">
+                <div class="alert alert-danger" role="alert" *ngIf="!nome.valid && nome.touched">
+                    Insira o Motivo
+                </div>
+            </div>
+            <!-- <div class="form-group" [class.has-error]="!nome.valid && nome.touched">
+                        <label for="nomeMarca">Solicitante</label>
+                        <input placeholder="Nome do solicitante" type="text" class="form-control" name="nome"
+                            id="nome" required #nome="ngModel" [class.is-invalid]="!nome.valid && nome.touched"
+                            [(ngModel)]="os.solicitante" name="solicitante">
+                        <div class="alert alert-danger" role="alert" *ngIf="!nome.valid && nome.touched">
+                            Nome do solicitante
+                        </div>
+                    </div> -->
+
+            <div class="form-group" [class.has-error]="!nome.valid && nome.touched">
+                <label for="nomeMarca">Relatório Técnico</label>
+                <input placeholder="Escreva aqui o que foi feito" type="text" class="form-control" name="nome" id="nome" required #nome="ngModel" [class.is-invalid]="!nome.valid && nome.touched" [(ngModel)]="os.observacao" name="observacao">
+                <div class="alert alert-danger" role="alert" *ngIf="!nome.valid && nome.touched">
+                    Insira o relatório
+                </div>
+            </div>
+
+            <div class="form-group" [class.has-error]="!nome.valid && nome.touched">
+                <label for="nomeMarca">Peças</label>
+                <input placeholder="Escreva aqui o que foi utilizado" type="text" class="form-control" name="peca" id="nome" required #nome="ngModel" [class.is-invalid]="!nome.valid && nome.touched" [(ngModel)]="os.peca" name="peca">
+                <div class="alert alert-danger" role="alert" *ngIf="!nome.valid && nome.touched">
+                    Insira as informações
+                </div>
+            </div>
+
+            <div *ngIf="os.assinatura != null">
+                <h3 *ngIf="os.assinatura.confirmacao == true">
+                    <span class="material-icons">
+                        add_task
+                    </span> Assinado
+                </h3>
+
+                <h3 *ngIf="os.assinatura.confirmacao == false">
+                    <span class="material-icons">
+                        thumb_down_alt
+                    </span> Assinatura recusada!
+                </h3>
+            </div>
+
+            <div class="btn-group mb-3">
+                <!-- <button type="submit" class="btn btn-primary salvar" [disabled]="!f.valid">Salvar</button> -->
+                <button type="button" class="btn btn-primary voltar" (click)="cancel()">Voltar</button>
+                <button type="submit" mat-raised-button class="btn salvar" [disabled]="!f.valid">Salvar</button>
+
+            </div>
+
+        </div>
+
+        <!-- parte Preventiva -->
+        <div *ngIf="os.tipo == 'Preventiva' ">
+
+            <div *ngIf="list.autoclave.nome == 'AUTOCLAVE'">
+                <h2>Cheklist Autoclave</h2>
+                <section class="grid-check" (click)="postCheckbox()">
+                    <mat-checkbox name="c1" class="example-margin" [(ngModel)]="checked.c1">Funcionamento porta (s)</mat-checkbox>
+                    <mat-checkbox name="c2" class="example-margin" [(ngModel)]="checked.c2">Guarnição de vedação porta (s)</mat-checkbox>
+                    <mat-checkbox name="c3" class="example-margin" [(ngModel)]="checked.c3">Diafragma trava segurança</mat-checkbox>
+                    <mat-checkbox name="c4" class="example-margin" [(ngModel)]="checked.c4">Válvulas de retenção</mat-checkbox>
+                    <mat-checkbox name="c5" class="example-margin" [(ngModel)]="checked.c5">Válvulas solenóides</mat-checkbox>
+                    <mat-checkbox name="c6" class="example-margin" [(ngModel)]="checked.c6">Válvulas pneumáticas</mat-checkbox>
+                    <mat-checkbox name="c7" class="example-margin" [(ngModel)]="checked.c7">Bomba de vácuo</mat-checkbox>
+                    <mat-checkbox name="c8" class="example-margin" [(ngModel)]="checked.c8">Bomba d'água</mat-checkbox>
+                    <mat-checkbox name="c9" class="example-margin" [(ngModel)]="checked.c9">Limpeza eletrodos / Bóia de nivel</mat-checkbox>
+                    <mat-checkbox name="c10" class="example-margin" [(ngModel)]="checked.c10">Aferição pressão câmara externa</mat-checkbox>
+                    <mat-checkbox name="c11" class="example-margin" [(ngModel)]="checked.c11">Aferição pressão câmara interna</mat-checkbox>
+                    <mat-checkbox name="c12" class="example-margin" [(ngModel)]="checked.c12">Aferição temperatura ciclo</mat-checkbox>
+                    <mat-checkbox name="c13" class="example-margin" [(ngModel)]="checked.c13">Contator de aquecimento</mat-checkbox>
+                    <mat-checkbox name="c14" class="example-margin" [(ngModel)]="checked.c14">Contator rele térmico / bomba d'água</mat-checkbox>
+                    <mat-checkbox name="c15" class="example-margin" [(ngModel)]="checked.c15">Contator rele térmico / bomba vácuo</mat-checkbox>
+                    <mat-checkbox name="c16" class="example-margin" [(ngModel)]="checked.c16">Filtro bacteriológico</mat-checkbox>
+                    <mat-checkbox name="c17" class="example-margin" [(ngModel)]="checked.c17">Corrente das resistências</mat-checkbox>
+                    <mat-checkbox name="c18" class="example-margin" [(ngModel)]="checked.c18">Limpeza da estrutura</mat-checkbox>
+                    <mat-checkbox name="c19" class="example-margin" [(ngModel)]="checked.c19">Comando microprocessado</mat-checkbox>
+                    <mat-checkbox name="c20" class="example-margin" [(ngModel)]="checked.c20">Impressora de ciclo</mat-checkbox>
+                    <mat-checkbox name="c21" class="example-margin" [(ngModel)]="checked.c21">Verificação de micro switch</mat-checkbox>
+                    <mat-checkbox name="c22" class="example-margin" [(ngModel)]="checked.c22">Válvula de segurança</mat-checkbox>
+                </section>
+            </div>
+
+            <div *ngIf="list.autoclave.nome == 'TERMODESINFECTORA'">
+                <h2>Cheklist Termodesinfectora</h2>
+                <section class="grid-check">
+                    <mat-checkbox name="c1" class="example-margin" [(ngModel)]="checked.c1">Funcionamento porta (s)</mat-checkbox>
+                    <mat-checkbox name="c2" class="example-margin" [(ngModel)]="checked.c2">Guarnição de vedação porta (s)</mat-checkbox>
+                    <mat-checkbox name="c3" class="example-margin" [(ngModel)]="checked.c3">Filtro de ar</mat-checkbox>
+                    <mat-checkbox name="c4" class="example-margin" [(ngModel)]="checked.c4">Válvulas de retenção</mat-checkbox>
+                    <mat-checkbox name="c5" class="example-margin" [(ngModel)]="checked.c5">Válvula solenóide água fria</mat-checkbox>
+                    <mat-checkbox name="c6" class="example-margin" [(ngModel)]="checked.c6">Válvula solenóide água quente</mat-checkbox>
+                    <mat-checkbox name="c7" class="example-margin" [(ngModel)]="checked.c7">Válvula soleinóde água tratada</mat-checkbox>
+                    <mat-checkbox name="c8" class="example-margin" [(ngModel)]="checked.c8">Válvula soleinóde trava porta (s)</mat-checkbox>
+                    <mat-checkbox name="c9" class="example-margin" [(ngModel)]="checked.c9">Bomba d'água</mat-checkbox>
+                    <mat-checkbox name="c10" class="example-margin" [(ngModel)]="checked.c10">Bomba (s) dosadora</mat-checkbox>
+                    <mat-checkbox name="c11" class="example-margin" [(ngModel)]="checked.c11">Bomba de circulação</mat-checkbox>
+                    <mat-checkbox name="c12" class="example-margin" [(ngModel)]="checked.c12">Contator bomba de circulação</mat-checkbox>
+                    <mat-checkbox name="c13" class="example-margin" [(ngModel)]="checked.c13">Contator rele térmico bomba d'água</mat-checkbox>
+                    <mat-checkbox name="c14" class="example-margin" [(ngModel)]="checked.c14">Contator das resistências cuba</mat-checkbox>
+                    <mat-checkbox name="c15" class="example-margin" [(ngModel)]="checked.c15">Contator resistências secagem</mat-checkbox>
+                    <mat-checkbox name="c16" class="example-margin" [(ngModel)]="checked.c16">Limpeza de bicos e rotores</mat-checkbox>
+                    <mat-checkbox name="c17" class="example-margin" [(ngModel)]="checked.c17">Limpeza de estrutura</mat-checkbox>
+                    <mat-checkbox name="c18" class="example-margin" [(ngModel)]="checked.c18">Corrente elétrica das resist. cuba</mat-checkbox>
+                    <mat-checkbox name="c19" class="example-margin" [(ngModel)]="checked.c19">Corrente elétrica das resist. secagem</mat-checkbox>
+                    <mat-checkbox name="c20" class="example-margin" [(ngModel)]="checked.c20">Integridade tupo de ar comprímido</mat-checkbox>
+                    <mat-checkbox name="c21" class="example-margin" [(ngModel)]="checked.c21">Impressora de ciclo</mat-checkbox>
+                    <mat-checkbox name="c22" class="example-margin" [(ngModel)]="checked.c22">Verificação de micro switch</mat-checkbox>
+                    <mat-checkbox name="c23" class="example-margin" [(ngModel)]="checked.c23">Válvula do sistema de drenagem</mat-checkbox>
+                </section>
+            </div>
+
+            <div *ngIf="list.autoclave.nome == 'GABINETE DE SECAGEM'">
+                <h2>Cheklist Gabinete de Secagem</h2>
+                <section class="grid-check">
+                    <mat-checkbox name="c1" class="example-margin" [(ngModel)]="checked.c1">Verificar disjuntor geral</mat-checkbox>
+                    <mat-checkbox name="c2" class="example-margin" [(ngModel)]="checked.c2">Verificar disjuntor motor</mat-checkbox>
+                    <mat-checkbox name="c3" class="example-margin" [(ngModel)]="checked.c3">Verificar contatores</mat-checkbox>
+                    <mat-checkbox name="c4" class="example-margin" [(ngModel)]="checked.c4">Verificar termostato de segurança</mat-checkbox>
+                    <mat-checkbox name="c5" class="example-margin" [(ngModel)]="checked.c5">Verificar sensor de temperatura</mat-checkbox>
+                    <mat-checkbox name="c6" class="example-margin" [(ngModel)]="checked.c6">Verificar comando elétrico</mat-checkbox>
+                    <mat-checkbox name="c7" class="example-margin" [(ngModel)]="checked.c7">Verificar controlador eletrônico</mat-checkbox>
+                    <mat-checkbox name="c8" class="example-margin" [(ngModel)]="checked.c8">Verificar guarnição da porta</mat-checkbox>
+                    <mat-checkbox name="c9" class="example-margin" [(ngModel)]="checked.c9">Verificar trinco / fechadura da porta</mat-checkbox>
+                    <mat-checkbox name="c10" class="example-margin" [(ngModel)]="checked.c10">Verificar filtros de ar</mat-checkbox>
+                    <mat-checkbox name="c11" class="example-margin" [(ngModel)]="checked.c11">Verificar ventoinha / motor</mat-checkbox>
+                    <mat-checkbox name="c12" class="example-margin" [(ngModel)]="checked.c12">Verificar limpeza estrutural</mat-checkbox>
+                </section>
+            </div>
+
+            <div *ngIf="list.autoclave.nome == 'SISTEMA DE OSMOSE REVERSA'">
+                <h2>Cheklist Sistema de Osmose Reversa</h2>
+                <section class="grid-check">
+                    <mat-checkbox name="c1" class="example-margin" [(ngModel)]="checked.c1">Verificar válvulas solenóides</mat-checkbox>
+                    <mat-checkbox name="c2" class="example-margin" [(ngModel)]="checked.c2">Verificar sensor de nível</mat-checkbox>
+                    <mat-checkbox name="c3" class="example-margin" [(ngModel)]="checked.c3">Verificar tubulação</mat-checkbox>
+                    <mat-checkbox name="c4" class="example-margin" [(ngModel)]="checked.c4">Verificar conexões</mat-checkbox>
+                    <mat-checkbox name="c5" class="example-margin" [(ngModel)]="checked.c5">Verificar carcaças de membranas</mat-checkbox>
+                    <mat-checkbox name="c6" class="example-margin" [(ngModel)]="checked.c6">Verificar carcaças de elementos filtrantes</mat-checkbox>
+                    <mat-checkbox name="c7" class="example-margin" [(ngModel)]="checked.c7">Verificar bomba de pressurização</mat-checkbox>
+                    <mat-checkbox name="c8" class="example-margin" [(ngModel)]="checked.c8">Verificar elementos filtrantes</mat-checkbox>
+                    <mat-checkbox name="c9" class="example-margin" [(ngModel)]="checked.c9">Verificar manômetros</mat-checkbox>
+                    <mat-checkbox name="c10" class="example-margin" [(ngModel)]="checked.c10">Verificar produção de água tratada</mat-checkbox>
+                    <mat-checkbox name="c11" class="example-margin" [(ngModel)]="checked.c11">Verificar saída do rejeito</mat-checkbox>
+                    <mat-checkbox name="c12" class="example-margin" [(ngModel)]="checked.c12">Verificar comando eletroeletrônico</mat-checkbox>
+                    <mat-checkbox name="c13" class="example-margin" [(ngModel)]="checked.c13">Verificar pressostato</mat-checkbox>
+                    <mat-checkbox name="c14" class="example-margin" [(ngModel)]="checked.c14">Verificar limpeza de reservatório</mat-checkbox>
+                    <mat-checkbox name="c15" class="example-margin" [(ngModel)]="checked.c15">Verificar limpeza estrutural</mat-checkbox>
+                </section>
+            </div>
+
+
+            <div class="form-group" [class.has-error]="!nome.valid && nome.touched">
+                <label for="nomeMarca">Observação</label>
+                <input placeholder="Escreva uma Observação" type="text" class="form-control" name="nome" id="nome" required #nome="ngModel" [class.is-invalid]="!nome.valid && nome.touched" [(ngModel)]="os.observacao" name="observacao">
+                <div class="alert alert-danger" role="alert" *ngIf="!nome.valid && nome.touched">
+                    Insira a Observação
+                </div>
+            </div>
+
+            <div class="form-group" [class.has-error]="!nome.valid && nome.touched">
+                <label for="nomeMarca">Peças</label>
+                <input placeholder="Escreva aqui o que foi utilizado" type="text" class="form-control" name="peca" id="nome" required #nome="ngModel" [class.is-invalid]="!nome.valid && nome.touched" [(ngModel)]="os.peca" name="peca">
+                <div class="alert alert-danger" role="alert" *ngIf="!nome.valid && nome.touched">
+                    Insira as informações
+                </div>
+            </div>
+            <div *ngIf="os.assinatura != null">
+                <h3 *ngIf="os.assinatura.confirmacao == true">
+                    <span class="material-icons">
+                        add_task
+                    </span> Assinado
+                </h3>
+
+                <h3 *ngIf="os.assinatura.confirmacao == false">
+                    <span class="material-icons">
+                        thumb_down_alt
+                    </span> Assinatura recusada!
+                </h3>
+            </div>
+
+            <div class="btn-group mb-3">
+                <!-- <button type="submit" class="btn btn-primary salvar" [disabled]="!f.valid">Salvar</button> -->
+                <button type="button" class="btn btn-primary voltar" (click)="cancel()">Voltar</button>
+                <button type="submit" mat-raised-button class="btn salvar" [disabled]="!f.valid">Salvar</button>
+
+            </div>
+
+        </div>
+
+
+
+
+
+
+
+        <!-- <div class="grid-container">
+            <button type="button" class="btn btn-primary voltar" (click)="cancel()">Voltar</button>
+            <button type="button" class="btn btn-primary voltar" [disabled]="!f.valid">Enviar</button>
+        </div> -->
+    </form>
+</mat-card>

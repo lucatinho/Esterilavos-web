@@ -1,0 +1,121 @@
+<mat-card>
+    <h1 class="center">Cadastrar Equipamento</h1>
+    <div class="grid-container">
+        <div class="cliente">
+            <mat-list-item>Cliente: {{dados.cliente}}</mat-list-item>
+        </div>
+        <div class="setor">
+            <mat-list-item>Setor: {{dados.setor}}</mat-list-item>
+        </div>
+    </div>
+    <mat-divider></mat-divider>
+    <ngx-spinner></ngx-spinner>
+
+    <form #f="ngForm" (ngSubmit)="OnSumbit(f)" class="form">
+        <div class="grid-container">
+
+            <!-- 1 -->
+            <div class="form-group" [class.has-error]="!nome.valid && nome.touched">
+                <mat-form-field appearance="fill" class="select">
+                    <mat-label>Selecione o Aparelho</mat-label>
+                    <mat-select [(value)]="equipamento.autoclave">
+                        <mat-option value="1">AUTOCLAVE</mat-option>
+                        <mat-option value="2">TERMODESINFECTORA</mat-option>
+                        <mat-option value="3">GABINETE DE SECAGEM</mat-option>
+                        <mat-option value="4">SISTEMA DE OSMOSE REVERSA</mat-option>
+                        <mat-option value="5">OUTROS</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+
+            <!-- 2 -->
+            <div class="form-group" [class.has-error]="!nome.valid && nome.touched">
+                <label for="nomeMarca">Fabricante</label>
+                <input placeholder="Nome do Fabricante" type="text" class="form-control" name="fabricante" id="nome" required #nome="ngModel" [class.is-invalid]="!nome.valid && nome.touched" [(ngModel)]="equipamento.fabricante" name="fabricante">
+                <div class="alert alert-danger" role="alert" *ngIf="!nome.valid && nome.touched">
+                    Insira o fabricante
+                </div>
+            </div>
+
+            <!-- 3 -->
+            <div class="form-group" [class.has-error]="!nome.valid && nome.touched">
+                <label for="nomeMarca">Modelo</label>
+                <input placeholder="Nome do Modelo" type="text" class="form-control" name="modelo" id="modelo" required #nome="ngModel" [class.is-invalid]="!nome.valid && nome.touched" [(ngModel)]="equipamento.modelo" name="nomeCategoria">
+                <div class="alert alert-danger" role="alert" *ngIf="!nome.valid && nome.touched">
+                    Insira o Modelo
+                </div>
+            </div>
+
+            <!-- 4 -->
+            <div class="form-group" [class.has-error]="!nome.valid && nome.touched">
+                <label for="nomeMarca">Nº Serie</label>
+                <input placeholder="Nº de Serie" type="text" class="form-control" name="numero_serie" id="nome" required #nome="ngModel" [class.is-invalid]="!nome.valid && nome.touched" [(ngModel)]="equipamento.numero_serie" name="numero_serie">
+                <div class="alert alert-danger" role="alert" *ngIf="!nome.valid && nome.touched">
+                    Insira o Numero de serie
+                </div>
+            </div>
+
+            <!-- 5 -->
+            <div class="form-group" [class.has-error]="!nome.valid && nome.touched">
+                <label for="nomeMarca">Ano de Fabricação</label>
+                <input placeholder="Ano de Fabricação" type="text" class="form-control" name="ano_fabrica" id="nome" required #nome="ngModel" [class.is-invalid]="!nome.valid && nome.touched" [(ngModel)]="equipamento.ano_fabrica" name="ano_fabrica">
+                <div class="alert alert-danger" role="alert" *ngIf="!nome.valid && nome.touched">
+                    Insira o ano de fabricação
+                </div>
+            </div>
+
+
+
+            <!-- 6 -->
+            <div class="form-group" [class.has-error]="!nome.valid && nome.touched">
+                <label for="nomeMarca">Numero de Patrimonio</label>
+
+                <input placeholder="Numero de Patrimonio" type="text" class="form-control" name="numero_patrimonio" id="nome" required #nome="ngModel" [class.is-invalid]="!nome.valid && nome.touched" [(ngModel)]="equipamento.numero_patrimonio" name="numero_patrimonio">
+                <div class="alert alert-danger" role="alert" *ngIf="!nome.valid && nome.touched">
+                    Insira o numero de patrimonio
+                </div>
+            </div>
+
+            <!-- 7 -->
+            <div class="form-group" [class.has-error]="!nome.valid && nome.touched">
+                <label for="nomeMarca">Tensão de alimentação</label>
+                <input placeholder="Ex: 127.5" type="text" class="form-control" name="tensao_alimentacao" id="nome" required pattern="\d+(\.\d{2})?" #nome="ngModel" [class.is-invalid]="!nome.valid && nome.touched" [(ngModel)]="equipamento.tensao_alimentacao" name="tensao_alimentacao">
+                <div class="alert alert-danger" role="alert" *ngIf="!nome.valid && nome.touched">
+                    Insira a Tensão de alimentação
+                </div>
+            </div>
+
+
+
+
+
+        </div>
+        <div class="Imagem">
+
+            <div class="text-center">
+                <img src="{{image1}}" class="avatar img-circle img-thumbnail" alt="imagem">
+                <h6>Imagem 1</h6>
+                <input #imageInput type="file" (change)="saveImage1($event.target.files)" accept="image/*" id="img1" />
+            </div>
+
+            <div class="text-center" *ngIf="salvarOutra == 2 || salvarOutra == 3 || salvarOutra == 4 || salvarOutra == 5 || salvarOutra == 6 || salvarOutra == 7">
+                <img src="{{image2}}" class="avatar img-circle img-thumbnail" alt="imagem">
+                <h6>Imagem 2</h6>
+                <input #imageInput type="file" (change)="saveImage2($event.target.files)" accept="image/*" id="img2" />
+            </div>
+
+            <div class="text-center" *ngIf="salvarOutra == 3 || salvarOutra == 4 || salvarOutra == 5 || salvarOutra == 6 || salvarOutra == 7">
+                <img src="{{image3}}" class="avatar img-circle img-thumbnail" alt="imagem">
+                <h6>Imagem 3</h6>
+                <input #imageInput type="file" (change)="saveImage3($event.target.files)" accept="image/*" id="img3" />
+            </div>
+        </div>
+        <div class="btn-group mb-3">
+            <!-- <button type="submit" class="btn btn-primary salvar" [disabled]="!f.valid">Salvar</button> -->
+            <button type="button" class="btn btn-primary voltar" (click)="cancel()">Voltar</button>
+            <button type="submit" mat-raised-button class="btn salvar" [disabled]="!f.valid">Salvar</button>
+
+        </div>
+
+    </form>
+</mat-card>

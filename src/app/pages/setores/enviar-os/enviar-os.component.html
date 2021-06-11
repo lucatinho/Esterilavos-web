@@ -1,0 +1,132 @@
+<h1 class="center">Enviar OS</h1>
+<!-- <div class="grid-container2">
+    <div class="cliente">
+        <mat-list-item>Cliente: {{dados.cliente}}</mat-list-item>
+    </div>
+    <div class="setor">
+        <mat-list-item>Setor: {{dados.setor}}</mat-list-item>
+    </div>
+</div>
+
+<mat-divider></mat-divider> -->
+<ngx-spinner></ngx-spinner>
+<div *ngIf="activeTable == false">
+    <div class="grid-container">
+        <mat-form-field appearance="fill" class="select">
+            <mat-label>Selecione o Ano</mat-label>
+            <mat-select [(value)]="filter.ano">
+                <mat-option value="2020">2020</mat-option>
+                <mat-option value="2021">2021</mat-option>
+                <mat-option value="2022">2022</mat-option>
+            </mat-select>
+        </mat-form-field>
+
+
+        <!-- <h3>Selecione o Mes</h3> -->
+        <mat-form-field appearance="fill" class="select">
+            <mat-label>Mês</mat-label>
+            <mat-select [(value)]="filter.mes">
+                <mat-option value="01">JANEIRO</mat-option>
+                <mat-option value="02">FEVEREIRO </mat-option>
+                <mat-option value="03">MARÇO</mat-option>
+                <mat-option value="04">ABRIL </mat-option>
+                <mat-option value="05">MAIO </mat-option>
+                <mat-option value="06">JUNHO </mat-option>
+                <mat-option value="07">JULHO</mat-option>
+                <mat-option value="08">AGOSTO</mat-option>
+                <mat-option value="09">SETEMBRO</mat-option>
+                <mat-option value="10">OUTUBRO</mat-option>
+                <mat-option value="11">NOVEMBRO</mat-option>
+                <mat-option value="12">DEZEMBRO</mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+    <div class="grid-container">
+        <button type="button" class="btn btn-primary voltar" (click)="cancel()">Voltar</button>
+        <button mat-raised-button color="primary" (click)="pesquisar()">Pesquisar</button>
+    </div>
+</div>
+
+<!-- tabela -->
+<div *ngIf="activeTable == true">
+    <!-- filtro -->
+    <mat-form-field class="conteiner">
+        <input (keyup)="applyFilter($event.target.value)" matInput placeholder="Pesquisar">
+    </mat-form-field>
+
+    <!-- tabela -->
+    <div class="mat-elevation-z8">
+        <table mat-table [dataSource]="dataSource">
+
+            <!-- Position Column -->
+            <ng-container matColumnDef="position">
+                <th mat-header-cell *matHeaderCellDef>Nº</th>
+                <td mat-cell *matCellDef="let element"> {{element.idOS}} </td>
+            </ng-container>
+
+            <!-- Name Column -->
+            <ng-container matColumnDef="name">
+                <th mat-header-cell *matHeaderCellDef> Cliente </th>
+                <td mat-cell *matCellDef="let element"> {{element.cliente.nome}} </td>
+            </ng-container>
+
+            <!-- setor Column -->
+            <ng-container matColumnDef="setor">
+                <th mat-header-cell *matHeaderCellDef> Setor </th>
+                <td mat-cell *matCellDef="let element"> {{element.equipamento.setor.nome}} </td>
+            </ng-container>
+
+            <!-- status Column -->
+            <ng-container matColumnDef="status">
+                <th mat-header-cell *matHeaderCellDef> Status </th>
+                <td mat-cell *matCellDef="let element"> {{element.status}} </td>
+            </ng-container>
+
+
+            <!-- Symbol Column -->
+            <ng-container matColumnDef="symbol" class="end">
+                <th mat-header-cell *matHeaderCellDef> Ações </th>
+                <td mat-cell *matCellDef="let element">
+                    <!-- se ainda nao tiver enviado email -->
+                    <div *ngIf="element.envEmail == false">
+                        <a (click)="enviar(element)" class="visibility" title="Enviar">
+                            <i type="button" class="material-icons">
+                                attach_email
+                            </i>
+                        </a>
+                    </div>
+
+                    <div *ngIf="element.envEmail == true">
+                        <a (click)="enviar(element)" class="visibilityTrue" title="Enviado">
+                            <i type="button" class="material-icons">
+                                attach_email
+                            </i>
+                        </a>
+                    </div>
+
+                    <!-- <a (click)="update(element.idEquipamento)" class="edit">
+                    <i type="button" class="material-icons">
+                        edit
+                    </i>
+                </a>
+
+                <a (click)="delete(element)" class="delete">
+                    <i type="button" class="material-icons">
+                        delete
+                    </i>
+                </a> -->
+
+                </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+
+        <!-- paginacao -->
+        <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+        <div class="example-button-row">
+            <button mat-raised-button color="primary" (click)="cancel()">Voltar</button>
+        </div>
+    </div>
+</div>

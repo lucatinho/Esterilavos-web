@@ -1,0 +1,33 @@
+<h1 class="center">Escolha o que deseja fazer</h1>
+<ngx-spinner></ngx-spinner>
+<div class="grid-container">
+  <div class="cliente">
+    <mat-list-item>Cliente: {{dados.cliente}}</mat-list-item>
+  </div>
+  <div class="setor">
+    <mat-list-item>Setor: {{dados.setor}}</mat-list-item>
+  </div>
+  <div class="equipamento">
+    <mat-list-item>Equipamento: {{dados.equipamento}}</mat-list-item>
+  </div>
+</div>
+
+<mat-divider></mat-divider>
+
+
+<mat-selection-list #shoes [multiple]="false">
+    
+    <mat-list-option *ngFor="let shoe of typesOfShoes" [value]="shoe" (click)="selecionado(shoes.selectedOptions.selected[0]?.value)">
+        <mat-icon mat-list-icon>input</mat-icon>
+      {{shoe}}
+    </mat-list-option>
+  </mat-selection-list>
+  
+  <!-- <p>
+    Option selected: {{shoes.selectedOptions.selected[0]?.value}}
+  </p> -->
+
+
+  <div class="example-button-row" *ngIf="role == 'ROLE_ADMINISTRATIVO'">
+    <button mat-raised-button color="primary" (click)="cancel()">Voltar</button>
+  </div>
